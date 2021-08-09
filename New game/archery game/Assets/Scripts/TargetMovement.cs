@@ -31,7 +31,7 @@ public class TargetMovement : MonoBehaviour
     {
         if (GameManager.gameStarted)
         {
-            if (GameManager.level >= 4 && GameManager.TargetChoices == "Left")
+            if (GameManager.level >= 4)
             {
                 float theta = Time.timeSinceLevelLoad / timePeriod;
                 float distance = Mathf.Sin(theta) * amplitude;

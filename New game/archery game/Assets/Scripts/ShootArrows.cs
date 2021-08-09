@@ -89,7 +89,7 @@ public class ShootArrows : MonoBehaviour
     {
         bowAnimator.SetBool("drawing", false);
 
-        GameObject arrow = Instantiate(arrowPrefab, arrowTransform.position, arrowTransform.rotation) as GameObject;
+        GameObject arrow = Instantiate(arrowPrefab, arrowTransform.position, arrowTransform.rotation);
 
         arrow.GetComponent<Rigidbody>().AddForce(arrowTransform.forward * currentArrowForce);
 

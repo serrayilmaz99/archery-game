@@ -16,6 +16,9 @@ public class TargetCollision : MonoBehaviour
     [SerializeField]
     private GameObject impactParticles;
 
+    private GameObject targetSpawnerGO;
+    private TargetSpawner targetSpawner;
+
     private AudioSource impactSound;
 
     private PlayerData _playerData;
@@ -30,6 +33,8 @@ public class TargetCollision : MonoBehaviour
     {
         targetMovement = GetComponent<TargetMovement>();
         impactSound = GetComponent<AudioSource>();
+        targetSpawnerGO= GameObject.Find("Target Spawner");
+        targetSpawner= targetSpawnerGO.GetComponent<TargetSpawner>();
 
         database = client.GetDatabase("Archery");
         collection = database.GetCollection<BsonDocument>("Archery");
@@ -45,14 +50,15 @@ public class TargetCollision : MonoBehaviour
             GetComponent<Collider>().enabled = false;
             GetComponent<Rigidbody>().isKinematic = false;
 
-            GameManager.score += GameManager.level;
+           // GameManager.score += GameManager.level;
+            GameManager.score ++;
             
             if (GameManager.score % 10 == 0 && GameManager.score != 0)
             {
-                //gameStateText = gameStateUI.GetComponent<Text>();
+                targetSpawner.transform.position = new Vector3(targetSpawner.transform.position.x + 0.3f, targetSpawner.transform.position.y, targetSpawner.transform.position.z);
                 GameManager.gameStateText.text = "You Passed Level " + GameManager.level + "!";
                 GameManager.level++;
-                GameManager.timer += 5;
+                GameManager.timer += 10;
                 //gameStateTextAnim = gameStateUI.GetComponent<Animator>();
 
                 GameManager.gameStateTextAnim.SetBool("ShowText", true);
@@ -64,19 +70,23 @@ public class TargetCollision : MonoBehaviour
             impactSound.volume = other.relativeVelocity.normalized.magnitude;
             impactSound.Play();
 
-            Instantiate(impactParticles, transform.position, impactParticles.transform.rotation);
+            //Instantiate(impactParticles, transform.position, impactParticles.transform.rotation);
 
             targetMovement.enabled = false;
 
             other.transform.parent = transform;
 
-            //  other.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+            other.gameObject.GetComponent<Rigidbody>().Sleep();
+           // other.gameObject.GetComponent<Rigidbody>().collisionDetectionMode=CollisionDetectionMode.ContinuousSpeculative;
 
             TargetSpawner.totalTargets--;
 
-            var document = new BsonDocument { { "x", gameObject.transform.position.x },{ "y", gameObject.transform.position.y },
-                { "z", gameObject.transform.position.z },{"hit", "true" } };
-            collection.InsertOne(document);
+           //var document = new BsonDocument { { "x", gameObject.transform.position.x },{ "y", gameObject.transform.position.y },
+           //    { "z", gameObject.transform.position.z },{"hit", "true" } };
+           //collection.InsertOne(document);
+
+           
+           // OYUNUN EN SONUNDA TOPLU HALDE DATABASE'E GEÇİR LİSTEYİ 
 
 
             Destroy(gameObject, 1f);

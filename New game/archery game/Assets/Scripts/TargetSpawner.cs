@@ -62,10 +62,6 @@ public class TargetSpawner : MonoBehaviour
 
     public void SpawnTargets()
     {
-        if (GameManager.score % 10 == 0 && GameManager.score != 0)
-        {
-            transform.position = new Vector3(transform.position.x + 0.5f, transform.position.y, transform.position.z);
-        }
         if (totalTargets == 0 && GameManager.gameStarted)
         {
 

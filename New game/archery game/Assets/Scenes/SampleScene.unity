@@ -150,17 +150,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 110938664}
-  m_LocalRotation: {x: 0.035778776, y: -0.030926727, z: 0.00032355142, w: 0.99888104}
+  m_LocalRotation: {x: 0.03612998, y: -0.030515691, z: -0.011095442, w: 0.9988195}
   m_LocalPosition: {x: 0, y: 0, z: -10.19}
   m_LocalScale: {x: 0.37, y: 0.3, z: 0.96647274}
   m_Children:
   - {fileID: 1834251432}
   m_Father: {fileID: 1740912133}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 4.1, y: -3.55, z: -0.09}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 4.1, y: -3.55, z: -1.4}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.08, y: -4.98}
+  m_AnchoredPosition: {x: 0.23, y: -4.98}
   m_SizeDelta: {x: 5, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &110938666
@@ -205,7 +205,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 110938667}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 131950562}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: PreStartGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &110938667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -292,6 +304,12 @@ MonoBehaviour:
   timerText: {fileID: 1577293859}
   startGameChime: {fileID: 8300000, guid: 20c372b43f56e2b48adb5c7757ed1f59, type: 3}
   endGameChime: {fileID: 8300000, guid: acd78459da513c24f823af866ef913ed, type: 3}
+  buttons:
+  - {fileID: 110938664}
+  - {fileID: 1322651507}
+  - {fileID: 480989305}
+  - {fileID: 2115601836}
+  - {fileID: 288313692}
 --- !u!82 &131950563
 AudioSource:
   m_ObjectHideFlags: 0
@@ -412,7 +430,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &155847224 stripped
 GameObject:
@@ -426,7 +444,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 155847224}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 097e4325eccca6e4bbbf0d9f4db18e04, type: 3}
   m_Name: 
@@ -559,17 +577,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 288313692}
-  m_LocalRotation: {x: 0.07230872, y: -0.05396086, z: 0.0030508363, w: 0.99591684}
-  m_LocalPosition: {x: 0, y: 0, z: -10.35}
-  m_LocalScale: {x: 0.37, y: 0.3, z: 0.41214243}
+  m_LocalRotation: {x: 0.0089895185, y: -0.033584174, z: -0.010261702, w: 0.9993428}
+  m_LocalPosition: {x: 0, y: 0, z: -10.07}
+  m_LocalScale: {x: 0.37, y: 0.3, z: 0.72}
   m_Children:
   - {fileID: 1991536795}
   m_Father: {fileID: 1740912133}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 8.3, y: -6.21, z: -0.1}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0.99, y: -3.86, z: -1.21}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.78, y: -4.96}
+  m_AnchoredPosition: {x: -1.84, y: -4.94}
   m_SizeDelta: {x: 5, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &288313694
@@ -614,7 +632,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 288313695}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 131950562}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: PreStartGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &288313695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -699,7 +729,7 @@ RectTransform:
   m_Children:
   - {fileID: 1799637212}
   m_Father: {fileID: 1740912133}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 8.3, y: -6.21, z: -0.1}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -761,7 +791,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 480989309}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 131950562}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: PreStartGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 131950561}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &480989309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1032,7 +1086,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4148341109436210, guid: e3bf992dca46de144b6c4b0d546838bd, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4148341109436210, guid: e3bf992dca46de144b6c4b0d546838bd, type: 3}
       propertyPath: m_LocalScale.x
@@ -1218,7 +1272,7 @@ Transform:
   m_LocalScale: {x: 0.99, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 1.69, y: 89.063, z: -1.2}
 --- !u!114 &963194229
 MonoBehaviour:
@@ -1360,7 +1414,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1286298479
 GameObject:
@@ -1422,7 +1476,7 @@ Transform:
   m_LocalScale: {x: 1.54, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 2.304, y: -3.39, z: 4.045}
 --- !u!1 &1322651507
 GameObject:
@@ -1457,11 +1511,11 @@ RectTransform:
   m_Children:
   - {fileID: 1465917522}
   m_Father: {fileID: 1740912133}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 3.03, y: -7.6, z: -0.59}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.99, y: -5.03}
+  m_AnchoredPosition: {x: 2.23, y: -5.03}
   m_SizeDelta: {x: 5, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1322651509
@@ -1506,7 +1560,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1322651510}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 131950562}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: PreStartGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1322651510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1682,7 +1748,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4809712701858230, guid: 83040e23266789242b52edadce6a7d94, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4809712701858230, guid: 83040e23266789242b52edadce6a7d94, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1962,7 +2028,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnArea: {x: 1, y: 2, z: 5}
-  targetPrefab: {fileID: 1628356709344694, guid: 46f130b83002e7242b60ebe72480b0d9, type: 3}
+  targetPrefab: {fileID: 6642316897388558982, guid: 46f130b83002e7242b60ebe72480b0d9, type: 3}
 --- !u!4 &1729712413
 Transform:
   m_ObjectHideFlags: 0
@@ -1975,7 +2041,7 @@ Transform:
   m_LocalScale: {x: 0.32160944, y: -4.488951, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1740912129
 GameObject:
@@ -2068,13 +2134,13 @@ RectTransform:
   m_LocalScale: {x: 1.2246, y: 1, z: 1}
   m_Children:
   - {fileID: 650818302}
-  - {fileID: 288313693}
   - {fileID: 110938665}
   - {fileID: 1322651508}
   - {fileID: 480989306}
   - {fileID: 2115601837}
+  - {fileID: 288313693}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 90.7, z: 0.06}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2178,7 +2244,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 435210, guid: 8022586ff5272d3479f16c35d5abea75, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 435210, guid: 8022586ff5272d3479f16c35d5abea75, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2413,16 +2479,16 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2115601836}
   m_LocalRotation: {x: 0.008543265, y: -0.033700455, z: 0.0029945702, w: 0.99939096}
-  m_LocalPosition: {x: 0, y: 0, z: -9.81}
+  m_LocalPosition: {x: 0, y: 0, z: -9.98}
   m_LocalScale: {x: 0.37, y: 0.3, z: 0.72}
   m_Children:
   - {fileID: 481495448}
   m_Father: {fileID: 1740912133}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0.99, y: -3.86, z: 0.31}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 3.84, y: -5.03}
+  m_AnchoredPosition: {x: 4.15, y: -5.03}
   m_SizeDelta: {x: 5, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2115601838
@@ -2480,7 +2546,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2115601840}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 131950562}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: PreStartGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2115601840
 MonoBehaviour:
   m_ObjectHideFlags: 0

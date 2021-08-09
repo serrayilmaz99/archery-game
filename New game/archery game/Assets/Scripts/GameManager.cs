@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
     private AudioSource gameStateSounds;
 
     public static string TargetChoices;
+    public List<GameObject> buttons;
 
     // Start is called before the first frame update
     void Start()
@@ -56,9 +57,13 @@ public class GameManager : MonoBehaviour
         Array.Resize(ref TargetSpawner.falseBoth, 0);
     }
 
-    private void PreStartGame()
+    public void PreStartGame()
     {
-
+        foreach (GameObject item in buttons)
+           {
+               item.SetActive(false);
+           }
+//        Debug.Log("prestart");
         gameStateText = gameStateUI.GetComponent<Text>();
         gameStateText.text = "Hit Space to Play!";
 
@@ -78,15 +83,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonUp("Button"))
-        {
-            GameObject[] buttons = GameObject.FindGameObjectsWithTag("Button");
-            for (int i = 0; i < 5; i++)
-            {
-                buttons[i].SetActive(false);
-            }
-            PreStartGame();
-        }
+
 
         if (gameStarted == false && Input.GetKeyDown(KeyCode.Space))
         {
