@@ -9,6 +9,8 @@ public class ShootArrows : MonoBehaviour
     [SerializeField]
     private GameObject arrowPrefab;
 
+    GameManager GameManager;
+
     [SerializeField]
     private Transform arrowTransform;
 
@@ -31,6 +33,8 @@ public class ShootArrows : MonoBehaviour
         bowAnimator = GetComponent<Animator>();
 
         bowStretchSound = GetComponent<AudioSource>();
+
+        GameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame

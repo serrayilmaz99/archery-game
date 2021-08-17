@@ -10,21 +10,117 @@ using MongoDB.Driver;
 
 public class TargetSpawner : MonoBehaviour
 {
+    public Vector3 spawnArea = new Vector3(1, 3, 4);
+    public List<GameObject> Targets = new List<GameObject>();
+    GameManager gameManager;
+
+    [SerializeField]
+    public GameObject targetPrefab = null;
+
+    void Start()
+    {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+    }
+
+    void Update()
+    {
+        if (gameManager.gameStarted && gameManager.totalTargets == 0)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                //Debug.Log("Loop");
+                SpawnTarget();
+            }
+        }
+        if (!gameManager.gameStarted && gameManager.totalTargets > 0)
+        {
+            //Debug.Log("Here");
+            DestroyTargets();
+            gameManager.totalTargets = 0;
+        }
+    }
+    public Vector3 RandomCoords()
+    {
+        float xMin = GameObject.FindGameObjectWithTag("TargetSpawner").transform.position.x - spawnArea.x / 2;
+        float yMin = GameObject.FindGameObjectWithTag("TargetSpawner").transform.position.y - spawnArea.y / 2;
+        float zMin = GameObject.FindGameObjectWithTag("TargetSpawner").transform.position.z - spawnArea.z / 2;
+        float xMax = GameObject.FindGameObjectWithTag("TargetSpawner").transform.position.x + spawnArea.x / 2;
+        float yMax = GameObject.FindGameObjectWithTag("TargetSpawner").transform.position.y + spawnArea.y / 2;
+        float zMax = GameObject.FindGameObjectWithTag("TargetSpawner").transform.position.z + spawnArea.z / 2;
+
+
+        float xRandom = Random.Range(xMin, xMax);
+        float yRandom = Random.Range(yMin, yMax);
+        float zRandom = Random.Range(zMin, zMax);
+
+        Vector3 posTarget = new Vector3(xRandom, yRandom, zRandom);
+
+        return posTarget;
+    }
+    public void SpawnTarget()
+    {
+        Vector3 posTarget = RandomCoords();
+
+        GameObject targett = Instantiate(targetPrefab, posTarget, targetPrefab.transform.rotation);
+
+        Targets.Add(targett);
+
+        targett.GetComponent<Collider>().enabled = true;
+        targett.GetComponent<Rigidbody>().isKinematic = true;
+
+        gameManager.totalTargets++;
+    }
+
+    // Update is called once per frame
+
+    public void DestroyTargets()
+    {
+        GameObject[] targets = GameObject.FindGameObjectsWithTag("Target");
+
+        for (int i = 0; i < targets.Length; i++)
+        {
+            /*
+            var document = new BsonDocument { { "x", targets[i].gameObject.transform.position.x},{ "y", targets[i].gameObject.transform.position.y},
+                { "z", targets[i].gameObject.transform.position.z },{"hit", "false" } };
+            GameManager.collection.InsertOne(document); */
+
+            TargetMovement targetMovement = targets[i].GetComponent<TargetMovement>();
+            targetMovement.enabled = false;
+
+            Rigidbody targetRigidBody = targets[i].GetComponent<Rigidbody>();
+            targetRigidBody.isKinematic = false;
+
+            Collider targetCollider = targets[i].GetComponent<Collider>();
+            targetCollider.enabled = false;
+
+            Targets.Remove(targets[i]);
+
+            Destroy(targets[i], 1f);
+        }
+
+    }
+
+    private static Transform GetTransform(GameObject[] targets, int i)
+    {
+        return targets[i].transform;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireCube(transform.position, spawnArea);
+    }
+}
+
+/*
+public class TargetSpawner : MonoBehaviour
+{
     [SerializeField]
     private Vector3 spawnArea = new Vector3(3, 3, 4);
-
-    static public Vector3[] falseLeft;
-    static public Vector3[] falseBoth;
-    static public Vector3[] falseRight;
 
     private Vector3 scaleChange;
 
     static public Vector3 initSpawnerPos;
-
-    [SerializeField]
-    //private int targetsToSpawn = GameManager.level+3;
-
-    private PlayerData playerData;
 
     public static int totalTargets;
 
@@ -33,17 +129,13 @@ public class TargetSpawner : MonoBehaviour
     [SerializeField]
     private GameObject targetPrefab = null;
 
-    MongoClient client = new MongoClient("mongodb+srv://admin-serra:serrayilmaz@mflix.ktzy1.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
-    IMongoDatabase database;
-    static IMongoCollection<BsonDocument> collection;
+    public List<Vector3> MissedTargets = new List<Vector3>();
+
 
     void Start()
     {
-        database = client.GetDatabase("Archery");
-        collection = database.GetCollection<BsonDocument>("Archery");
         initSpawnerPos = transform.position;
         scaleChange = new Vector3(-0.2f, -0.2f, -0.2f);
-        
     }
 
     // Update is called once per frame
@@ -83,14 +175,18 @@ public class TargetSpawner : MonoBehaviour
 
                         Vector3 posTarget = new Vector3(xRandom, yRandom, zRandom);
 
+                        if (MissedTargets.Count >= 5 && TargetCollision.HitTargets.Count >= 5)
+                        {
+                            //Debug.Log(MissedTargets.Count);
+                            int RandomPosMissed = Random.Range(0, MissedTargets.Count);
+                            int RandomPosHit = Random.Range(0, TargetCollision.HitTargets.Count);
+                            posTarget = (MissedTargets[RandomPosMissed] + TargetCollision.HitTargets[RandomPosHit]) * 0.5f;
+                        }
+
                         GameObject targett = Instantiate(targetPrefab, posTarget, targetPrefab.transform.rotation);
                         targett.transform.localScale += scaleChange;
-                      /*  if (GameManager.score % 10 == 0 && GameManager.score != 0)
-                        {
-                            // transform.position = new Vector3(transform.position.x + 0.5f, transform.position.y, transform.position.z);
-                        } */
-
                         totalTargets++;
+                        StartCoroutine(Countdown(targett));
                     }
 
                     if (GameManager.TargetChoices == "Horizontal")
@@ -101,14 +197,19 @@ public class TargetSpawner : MonoBehaviour
                     
                         Vector3 posTarget = new Vector3(xRandom, yRandom, zRandom);
 
+
+                        if (MissedTargets.Count >= 5 && TargetCollision.HitTargets.Count >= 5)
+                        {
+                            //Debug.Log(MissedTargets.Count);
+                            int RandomPosMissed = Random.Range(0, MissedTargets.Count);
+                            int RandomPosHit = Random.Range(0, TargetCollision.HitTargets.Count);
+                            posTarget = (MissedTargets[RandomPosMissed] + TargetCollision.HitTargets[RandomPosHit]) * 0.5f;
+                        }
+
                         GameObject targett = Instantiate(targetPrefab, posTarget, targetPrefab.transform.rotation);
                         targett.transform.localScale += scaleChange;
-                      /*  if (GameManager.score % 10 == 0 && GameManager.score != 0)
-                        {
-                           // transform.position = new Vector3(transform.position.x + 0.5f, transform.position.y, transform.position.z);
-                        } */
-
                         totalTargets++;
+                        StartCoroutine(Countdown(targett));
                     }
 
                     if(GameManager.TargetChoices == "Left")
@@ -119,20 +220,18 @@ public class TargetSpawner : MonoBehaviour
 
                         Vector3 posTarget = new Vector3(xRandom, yRandom, zRandom);
 
-                       /* if (falseLeft.Length >= 5)
+                        if (MissedTargets.Count >= 5 && TargetCollision.HitTargets.Count>=5)
                         {
-                            int RandomNum = Random.Range(0, falseLeft.Length);
-                            posTarget = falseLeft[RandomNum];
-                           // Debug.Log(posTarget);
-                        } */
+                            //Debug.Log(MissedTargets.Count);
+                            int RandomPosMissed = Random.Range(0, MissedTargets.Count);
+                            int RandomPosHit = Random.Range(0, TargetCollision.HitTargets.Count);
+                            posTarget = (MissedTargets[RandomPosMissed] + TargetCollision.HitTargets[RandomPosHit]) * 0.5f;
+                        }
 
                         GameObject targett = Instantiate(targetPrefab, posTarget, targetPrefab.transform.rotation);
-                       /* if (GameManager.score % 10 == 0 && GameManager.score != 0)
-                        {
-                            transform.position = new Vector3(transform.position.x+0.7f, transform.position.y, transform.position.z);
-                        } */
-
                         totalTargets++;
+                        StartCoroutine(Countdown(targett));
+                        
                     }
                     if (GameManager.TargetChoices == "Both")
                     {
@@ -142,19 +241,18 @@ public class TargetSpawner : MonoBehaviour
 
                         Vector3 posTarget = new Vector3(xRandom, yRandom, zRandom);
 
-                      /*  if (falseBoth.Length >= 10)
+                        if (MissedTargets.Count >= 5 && TargetCollision.HitTargets.Count >= 5)
                         {
-                            int RandomNum = Random.Range(0, falseBoth.Length);
-                            posTarget = falseBoth[RandomNum];
-                        } */
+                            //Debug.Log(MissedTargets.Count);
+                            int RandomPosMissed = Random.Range(0, MissedTargets.Count);
+                            int RandomPosHit = Random.Range(0, TargetCollision.HitTargets.Count);
+                            posTarget = (MissedTargets[RandomPosMissed] + TargetCollision.HitTargets[RandomPosHit]) * 0.5f;
+                        }
 
                         GameObject targett = Instantiate(targetPrefab, posTarget, targetPrefab.transform.rotation);
-                       /* if (GameManager.score % 10 == 0 && GameManager.score != 0)
-                        {
-                            transform.position = new Vector3(transform.position.x + 0.5f, transform.position.y, transform.position.z);
-                        } */
-
+                      
                         totalTargets++;
+                        StartCoroutine(Countdown(targett));
                     }
                     if (GameManager.TargetChoices == "Right")
                     {
@@ -164,19 +262,19 @@ public class TargetSpawner : MonoBehaviour
 
                         Vector3 posTarget = new Vector3(xRandom, yRandom, zRandom);
 
-                      /*  if (falseRight.Length>=10)
+
+                        if (MissedTargets.Count >= 5 && TargetCollision.HitTargets.Count >= 5)
                         {
-                            int RandomNum = Random.Range(0, falseRight.Length);
-                            posTarget = falseRight[RandomNum];
-                        } */
+                            //Debug.Log(MissedTargets.Count);
+                            int RandomPosMissed = Random.Range(0, MissedTargets.Count);
+                            int RandomPosHit = Random.Range(0, TargetCollision.HitTargets.Count);
+                            posTarget = (MissedTargets[RandomPosMissed] + TargetCollision.HitTargets[RandomPosHit]) * 0.5f;
+                        }
 
                         GameObject targett = Instantiate(targetPrefab, posTarget, targetPrefab.transform.rotation);
-                      /*  if (GameManager.score % 10 == 0 && GameManager.score != 0)
-                        {
-                            transform.position = new Vector3(transform.position.x + 0.5f, transform.position.y, transform.position.z);
-                        } */
 
                         totalTargets++;
+                        StartCoroutine(Countdown(targett));
                     }
                 }
             }     
@@ -193,13 +291,11 @@ public class TargetSpawner : MonoBehaviour
                         Vector3 posTarget = new Vector3(xRandom, yRandom, zRandom);
 
                         GameObject targett = Instantiate(targetPrefab, posTarget, targetPrefab.transform.rotation);
-                        targett.transform.localScale += scaleChange;
-                        /*  if (GameManager.score % 10 == 0 && GameManager.score != 0)
-                          {
-                              // transform.position = new Vector3(transform.position.x + 0.5f, transform.position.y, transform.position.z);
-                          } */
 
                         totalTargets++;
+                        targett.transform.localScale += scaleChange;
+                        StartCoroutine(Countdown(targett));
+        
                     }
 
                     if (GameManager.TargetChoices == "Horizontal")
@@ -211,13 +307,11 @@ public class TargetSpawner : MonoBehaviour
                         Vector3 posTarget = new Vector3(xRandom, yRandom, zRandom);
 
                         GameObject targett = Instantiate(targetPrefab, posTarget, targetPrefab.transform.rotation);
-                        targett.transform.localScale += scaleChange;
-                        /*  if (GameManager.score % 10 == 0 && GameManager.score != 0)
-                          {
-                             // transform.position = new Vector3(transform.position.x + 0.5f, transform.position.y, transform.position.z);
-                          } */
 
                         totalTargets++;
+                        targett.transform.localScale += scaleChange;
+                        StartCoroutine(Countdown(targett));
+                        
                     }
 
                     if (GameManager.TargetChoices == "Left")
@@ -228,20 +322,18 @@ public class TargetSpawner : MonoBehaviour
 
                         Vector3 posTarget = new Vector3(xRandom, yRandom, zRandom);
 
-                        /* if (falseLeft.Length >= 5)
-                         {
-                             int RandomNum = Random.Range(0, falseLeft.Length);
-                             posTarget = falseLeft[RandomNum];
-                            // Debug.Log(posTarget);
-                         } */
+                        if (MissedTargets.Count >= 5 && TargetCollision.HitTargets.Count >= 5)
+                        {
+                            //Debug.Log(MissedTargets.Count);
+                            int RandomPosMissed = Random.Range(0, MissedTargets.Count);
+                            int RandomPosHit = Random.Range(0, TargetCollision.HitTargets.Count);
+                            posTarget = (MissedTargets[RandomPosMissed] + TargetCollision.HitTargets[RandomPosHit]) * 0.5f;
+                        }
 
                         GameObject targett = Instantiate(targetPrefab, posTarget, targetPrefab.transform.rotation);
-                        /* if (GameManager.score % 10 == 0 && GameManager.score != 0)
-                         {
-                             transform.position = new Vector3(transform.position.x+0.7f, transform.position.y, transform.position.z);
-                         } */
 
                         totalTargets++;
+                        StartCoroutine(Countdown(targett));
                     }
                     if (GameManager.TargetChoices == "Both")
                     {
@@ -251,19 +343,18 @@ public class TargetSpawner : MonoBehaviour
 
                         Vector3 posTarget = new Vector3(xRandom, yRandom, zRandom);
 
-                        /*  if (falseBoth.Length >= 10)
-                          {
-                              int RandomNum = Random.Range(0, falseBoth.Length);
-                              posTarget = falseBoth[RandomNum];
-                          } */
+                        if (MissedTargets.Count >= 5 && TargetCollision.HitTargets.Count >= 5)
+                        {
+                            //Debug.Log(MissedTargets.Count);
+                            int RandomPosMissed = Random.Range(0, MissedTargets.Count);
+                            int RandomPosHit = Random.Range(0, TargetCollision.HitTargets.Count);
+                            posTarget = (MissedTargets[RandomPosMissed] + TargetCollision.HitTargets[RandomPosHit]) * 0.5f;
+                        }
 
                         GameObject targett = Instantiate(targetPrefab, posTarget, targetPrefab.transform.rotation);
-                        /* if (GameManager.score % 10 == 0 && GameManager.score != 0)
-                         {
-                             transform.position = new Vector3(transform.position.x + 0.5f, transform.position.y, transform.position.z);
-                         } */
 
                         totalTargets++;
+                        StartCoroutine(Countdown(targett));
                     }
                     if (GameManager.TargetChoices == "Right")
                     {
@@ -273,22 +364,47 @@ public class TargetSpawner : MonoBehaviour
 
                         Vector3 posTarget = new Vector3(xRandom, yRandom, zRandom);
 
-                        /*  if (falseRight.Length>=10)
-                          {
-                              int RandomNum = Random.Range(0, falseRight.Length);
-                              posTarget = falseRight[RandomNum];
-                          } */
+                        if (MissedTargets.Count >= 5 && TargetCollision.HitTargets.Count >= 5)
+                        {
+                            //Debug.Log(MissedTargets.Count);
+                            int RandomPosMissed = Random.Range(0, MissedTargets.Count);
+                            int RandomPosHit = Random.Range(0, TargetCollision.HitTargets.Count);
+                            posTarget = (MissedTargets[RandomPosMissed] + TargetCollision.HitTargets[RandomPosHit]) * 0.5f;
+                        }
 
                         GameObject targett = Instantiate(targetPrefab, posTarget, targetPrefab.transform.rotation);
-                        /*  if (GameManager.score % 10 == 0 && GameManager.score != 0)
-                          {
-                              transform.position = new Vector3(transform.position.x + 0.5f, transform.position.y, transform.position.z);
-                          } */
 
                         totalTargets++;
+                        StartCoroutine(Countdown(targett));
                     }
                 }
             }
+        }
+    }
+
+    IEnumerator Countdown(GameObject target)
+    {
+        yield return new WaitForSeconds(5f);
+        if(target != null)
+        {
+            totalTargets--;
+            MissedTargets.Add(target.transform.position);
+
+            var document = new BsonDocument { { "x", target.gameObject.transform.position.x},{ "y", target.gameObject.transform.position.y},
+                { "z", target.gameObject.transform.position.z },{"hit", "false" } };
+            GameManager.collection.InsertOne(document);
+
+            TargetMovement targetMovement = target.GetComponent<TargetMovement>();
+            targetMovement.enabled = false;
+
+            Rigidbody targetRigidBody = target.GetComponent<Rigidbody>();
+            targetRigidBody.isKinematic = false;
+
+            Collider targetCollider = target.GetComponent<Collider>();
+            targetCollider.enabled = false;
+            
+            Destroy(target, 1f);
+            
         }
     }
 
@@ -301,28 +417,7 @@ public class TargetSpawner : MonoBehaviour
         {
             var document = new BsonDocument { { "x", targets[i].gameObject.transform.position.x},{ "y", targets[i].gameObject.transform.position.y},
                 { "z", targets[i].gameObject.transform.position.z },{"hit", "false" } };
-            collection.InsertOne(document);
-
-            /*
-            if (GameManager.TargetChoices == "Left")
-            {
-                Array.Resize(ref falseLeft, falseLeft.Length + 1);
-                falseLeft[falseLeft.Length - 1] = new Vector3(targets[i].gameObject.transform.position.x,
-                    targets[i].gameObject.transform.position.y, targets[i].gameObject.transform.position.z);
-                //Debug.Log(falseLeft.Length);
-            }
-            if (GameManager.TargetChoices == "Both")
-            {
-                Array.Resize(ref falseBoth, falseBoth.Length + 1);
-                falseBoth[falseBoth.Length - 1] = new Vector3(targets[i].gameObject.transform.position.x,
-                    targets[i].gameObject.transform.position.y, targets[i].gameObject.transform.position.z);
-            }
-            if (GameManager.TargetChoices == "Right")
-            {
-                Array.Resize(ref falseRight, falseRight.Length + 1);
-                falseRight[falseRight.Length - 1] = new Vector3(targets[i].gameObject.transform.position.x,
-                    targets[i].gameObject.transform.position.y, targets[i].gameObject.transform.position.z);
-            } */
+            GameManager.collection.InsertOne(document);
 
             TargetMovement targetMovement = targets[i].GetComponent<TargetMovement>();
             targetMovement.enabled = false;
@@ -349,3 +444,4 @@ public class TargetSpawner : MonoBehaviour
         Gizmos.DrawWireCube(transform.position, spawnArea);
     }
 }
+*/

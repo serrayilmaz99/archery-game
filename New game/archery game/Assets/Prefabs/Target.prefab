@@ -129,7 +129,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetMovement: {fileID: 0}
-  impactParticles: {fileID: 0}
+  impactParticles: {fileID: 147558, guid: 8022586ff5272d3479f16c35d5abea75, type: 3}
+  counter: 0
+  hit: 0
+  targetPrefab: {fileID: 6642316897388558982}
+  HitTargets: []
+  MissedTargets: []
 --- !u!114 &8752207618757673124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,7 +142,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6642316897388558982}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0131919132c00f2458a2cb8b3e848da8, type: 3}
   m_Name: 

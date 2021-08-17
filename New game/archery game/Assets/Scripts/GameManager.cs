@@ -3,14 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using MongoDB.Bson;
+using MongoDB.Driver;
+using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
 
     //[SerializeField]
-    private float gameLengthInSeconds = 30f;
+    private float gameLengthInSeconds = 60f;
 
-    static public int level;
+    //static public int level;
+
+    public int totalTargets;
 
     [SerializeField]
     private Text scoreText;
@@ -21,7 +26,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     public static GameObject gameStateUI;
 
-    public static bool gameStarted = false;
+    public bool gameStarted = false;
 
     public static int score;
     public static float timer;
@@ -37,8 +42,14 @@ public class GameManager : MonoBehaviour
 
     private AudioSource gameStateSounds;
 
-    public static string TargetChoices;
+    private TargetSpawner targetSpawner;
+
+    public string TargetChoices;
     public List<GameObject> buttons;
+
+    MongoClient client = new MongoClient("mongodb+srv://admin-serra:serrayilmaz@mflix.ktzy1.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
+    IMongoDatabase database;
+    public static IMongoCollection<BsonDocument> collection;
 
     // Start is called before the first frame update
     void Start()
@@ -52,17 +63,20 @@ public class GameManager : MonoBehaviour
             gameStateTextAnim = gameStateUI.GetComponent<Animator>();
             gameStateTextAnim.SetBool("ShowText", true);
         }
-        Array.Resize(ref TargetSpawner.falseLeft, 0);
-        Array.Resize(ref TargetSpawner.falseRight, 0);
-        Array.Resize(ref TargetSpawner.falseBoth, 0);
+        database = client.GetDatabase("Archery");
+        collection = database.GetCollection<BsonDocument>("Archery");
+
+        totalTargets = 0;
+        targetSpawner = GameObject.Find("Target Spawner").GetComponent<TargetSpawner>();
+
     }
 
     public void PreStartGame()
     {
         foreach (GameObject item in buttons)
-           {
-               item.SetActive(false);
-           }
+        {
+            item.SetActive(false);
+        }
 //        Debug.Log("prestart");
         gameStateText = gameStateUI.GetComponent<Text>();
         gameStateText.text = "Hit Space to Play!";
@@ -83,7 +97,6 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
 
         if (gameStarted == false && Input.GetKeyDown(KeyCode.Space))
         {
@@ -114,28 +127,30 @@ public class GameManager : MonoBehaviour
 
         timerText.text = Mathf.RoundToInt(timer) + " Seconds";
     }
-
+   
     private void StartGame()
     {
         score = 0;
-        level = 1;
+        //level = 1;
         gameStarted = true;
         gameStateTextAnim.SetBool("ShowText", false);
         gameStateSounds.clip = startGameChime;
         gameStateSounds.Play();
-        GameObject.FindGameObjectWithTag("TargetSpawner").transform.position = TargetSpawner.initSpawnerPos;
+        //GameObject.FindGameObjectWithTag("TargetSpawner").transform.position = TargetSpawner.initSpawnerPos;
     }
 
     private void EndGame()
     {
         gameStateText.text = "Game Over!\nPress Space to Restart";
         gameStateTextAnim.SetBool("ShowText", true);
+        
         gameStarted = false;
+        //targetSpawner.DestroyTargets();
         timer = gameLengthInSeconds;
         gameStateSounds.clip = endGameChime;
         gameStateSounds.Play();
+        
     }
-    
 }
 
 /*

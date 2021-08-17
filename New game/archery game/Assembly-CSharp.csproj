@@ -62,7 +62,6 @@
      <Compile Include="Assets\Scripts\LeftButton.cs" />
      <Compile Include="Assets\Scripts\HideCursor.cs" />
      <Compile Include="Assets\Scripts\HorizontalButton.cs" />
-     <Compile Include="Assets\Scripts\PlayerData.cs" />
      <Compile Include="Assets\Scripts\TargetMovement.cs" />
      <Compile Include="Assets\SampleScenes\Menu\Scripts\PauseMenu.cs" />
      <Compile Include="Assets\Scripts\TargetCollision.cs" />
@@ -80,82 +79,82 @@
      <Compile Include="Assets\SampleScenes\Scripts\PlaceTargetWithMouse.cs" />
      <None Include="Assets\SampleScenes\Shaders\Skybox-Procedural.shader" />
  <Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
- <HintPath>C:/Users/atill/Documents/GitHub/archery-game/New game/archery game/Library/ScriptAssemblies/Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>
+ <HintPath>C:/Users/hp/Documents/GitHub/archery-game/New game/archery game/Library/ScriptAssemblies/Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Timeline.Editor">
- <HintPath>C:/Users/atill/Documents/GitHub/archery-game/New game/archery game/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+ <HintPath>C:/Users/hp/Documents/GitHub/archery-game/New game/archery game/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.RenderPipelines.Universal.Shaders">
- <HintPath>C:/Users/atill/Documents/GitHub/archery-game/New game/archery game/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Shaders.dll</HintPath>
+ <HintPath>C:/Users/hp/Documents/GitHub/archery-game/New game/archery game/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Shaders.dll</HintPath>
  </Reference>
  <Reference Include="Unity.VSCode.Editor">
- <HintPath>C:/Users/atill/Documents/GitHub/archery-game/New game/archery game/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+ <HintPath>C:/Users/hp/Documents/GitHub/archery-game/New game/archery game/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.ProBuilder">
- <HintPath>C:/Users/atill/Documents/GitHub/archery-game/New game/archery game/Library/ScriptAssemblies/Unity.ProBuilder.dll</HintPath>
+ <HintPath>C:/Users/hp/Documents/GitHub/archery-game/New game/archery game/Library/ScriptAssemblies/Unity.ProBuilder.dll</HintPath>
  </Reference>
  <Reference Include="Unity.RenderPipelines.Core.Editor">
- <HintPath>C:/Users/atill/Documents/GitHub/archery-game/New game/archery game/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Editor.dll</HintPath>
+ <HintPath>C:/Users/hp/Documents/GitHub/archery-game/New game/archery game/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.ProBuilder.Editor">
- <HintPath>C:/Users/atill/Documents/GitHub/archery-game/New game/archery game/Library/ScriptAssemblies/Unity.ProBuilder.Editor.dll</HintPath>
+ <HintPath>C:/Users/hp/Documents/GitHub/archery-game/New game/archery game/Library/ScriptAssemblies/Unity.ProBuilder.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.ProBuilder.AssetIdRemapUtility">
- <HintPath>C:/Users/atill/Documents/GitHub/archery-game/New game/archery game/Library/ScriptAssemblies/Unity.ProBuilder.AssetIdRemapUtility.dll</HintPath>
+ <HintPath>C:/Users/hp/Documents/GitHub/archery-game/New game/archery game/Library/ScriptAssemblies/Unity.ProBuilder.AssetIdRemapUtility.dll</HintPath>
  </Reference>
  <Reference Include="Unity.RenderPipelines.Core.Runtime">
- <HintPath>C:/Users/atill/Documents/GitHub/archery-game/New game/archery game/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Runtime.dll</HintPath>
+ <HintPath>C:/Users/hp/Documents/GitHub/archery-game/New game/archery game/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Runtime.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro.Editor">
- <HintPath>C:/Users/atill/Documents/GitHub/archery-game/New game/archery game/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+ <HintPath>C:/Users/hp/Documents/GitHub/archery-game/New game/archery game/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.RenderPipelines.Universal.Runtime">
- <HintPath>C:/Users/atill/Documents/GitHub/archery-game/New game/archery game/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
+ <HintPath>C:/Users/hp/Documents/GitHub/archery-game/New game/archery game/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
  </Reference>
  <Reference Include="Unity.RenderPipelines.Universal.Editor">
- <HintPath>C:/Users/atill/Documents/GitHub/archery-game/New game/archery game/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Editor.dll</HintPath>
+ <HintPath>C:/Users/hp/Documents/GitHub/archery-game/New game/archery game/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Editor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UI">
- <HintPath>C:/Users/atill/Documents/GitHub/archery-game/New game/archery game/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+ <HintPath>C:/Users/hp/Documents/GitHub/archery-game/New game/archery game/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Searcher.Editor">
- <HintPath>C:/Users/atill/Documents/GitHub/archery-game/New game/archery game/Library/ScriptAssemblies/Unity.Searcher.Editor.dll</HintPath>
+ <HintPath>C:/Users/hp/Documents/GitHub/archery-game/New game/archery game/Library/ScriptAssemblies/Unity.Searcher.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Timeline">
- <HintPath>C:/Users/atill/Documents/GitHub/archery-game/New game/archery game/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+ <HintPath>C:/Users/hp/Documents/GitHub/archery-game/New game/archery game/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Postprocessing.Editor">
- <HintPath>C:/Users/atill/Documents/GitHub/archery-game/New game/archery game/Library/ScriptAssemblies/Unity.Postprocessing.Editor.dll</HintPath>
+ <HintPath>C:/Users/hp/Documents/GitHub/archery-game/New game/archery game/Library/ScriptAssemblies/Unity.Postprocessing.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Rider.Editor">
- <HintPath>C:/Users/atill/Documents/GitHub/archery-game/New game/archery game/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+ <HintPath>C:/Users/hp/Documents/GitHub/archery-game/New game/archery game/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
- <HintPath>C:/Users/atill/Documents/GitHub/archery-game/New game/archery game/Library/ScriptAssemblies/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
+ <HintPath>C:/Users/hp/Documents/GitHub/archery-game/New game/archery game/Library/ScriptAssemblies/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Postprocessing.Runtime">
- <HintPath>C:/Users/atill/Documents/GitHub/archery-game/New game/archery game/Library/ScriptAssemblies/Unity.Postprocessing.Runtime.dll</HintPath>
+ <HintPath>C:/Users/hp/Documents/GitHub/archery-game/New game/archery game/Library/ScriptAssemblies/Unity.Postprocessing.Runtime.dll</HintPath>
  </Reference>
  <Reference Include="Unity.VisualStudio.Editor">
- <HintPath>C:/Users/atill/Documents/GitHub/archery-game/New game/archery game/Library/ScriptAssemblies/Unity.VisualStudio.Editor.dll</HintPath>
+ <HintPath>C:/Users/hp/Documents/GitHub/archery-game/New game/archery game/Library/ScriptAssemblies/Unity.VisualStudio.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.ProBuilder.AddOns.Editor">
- <HintPath>C:/Users/atill/Documents/GitHub/archery-game/New game/archery game/Library/ScriptAssemblies/Unity.ProBuilder.AddOns.Editor.dll</HintPath>
+ <HintPath>C:/Users/hp/Documents/GitHub/archery-game/New game/archery game/Library/ScriptAssemblies/Unity.ProBuilder.AddOns.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.ShaderGraph.Editor">
- <HintPath>C:/Users/atill/Documents/GitHub/archery-game/New game/archery game/Library/ScriptAssemblies/Unity.ShaderGraph.Editor.dll</HintPath>
+ <HintPath>C:/Users/hp/Documents/GitHub/archery-game/New game/archery game/Library/ScriptAssemblies/Unity.ShaderGraph.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
- <HintPath>C:/Users/atill/Documents/GitHub/archery-game/New game/archery game/Library/ScriptAssemblies/Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
+ <HintPath>C:/Users/hp/Documents/GitHub/archery-game/New game/archery game/Library/ScriptAssemblies/Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro">
- <HintPath>C:/Users/atill/Documents/GitHub/archery-game/New game/archery game/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+ <HintPath>C:/Users/hp/Documents/GitHub/archery-game/New game/archery game/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
  </Reference>
  <Reference Include="Unity.PlasticSCM.Editor">
- <HintPath>C:/Users/atill/Documents/GitHub/archery-game/New game/archery game/Library/ScriptAssemblies/Unity.PlasticSCM.Editor.dll</HintPath>
+ <HintPath>C:/Users/hp/Documents/GitHub/archery-game/New game/archery game/Library/ScriptAssemblies/Unity.PlasticSCM.Editor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.UI">
- <HintPath>C:/Users/atill/Documents/GitHub/archery-game/New game/archery game/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+ <HintPath>C:/Users/hp/Documents/GitHub/archery-game/New game/archery game/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2020.1.7f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -341,25 +340,25 @@
  <HintPath>C:/Program Files/Unity/Hub/Editor/2020.1.7f1/Editor/Data/Managed/UnityEngine/UnityEngine.XRModule.dll</HintPath>
  </Reference>
  <Reference Include="DnsClient">
- <HintPath>C:/Users/atill/Documents/GitHub/archery-game/New game/archery game/Assets/Database/Plugins/DnsClient.dll</HintPath>
+ <HintPath>C:/Users/hp/Documents/GitHub/archery-game/New game/archery game/Assets/Database/Plugins/DnsClient.dll</HintPath>
  </Reference>
  <Reference Include="MongoDB.Bson">
- <HintPath>C:/Users/atill/Documents/GitHub/archery-game/New game/archery game/Assets/Database/Plugins/MongoDB.Bson.dll</HintPath>
+ <HintPath>C:/Users/hp/Documents/GitHub/archery-game/New game/archery game/Assets/Database/Plugins/MongoDB.Bson.dll</HintPath>
  </Reference>
  <Reference Include="MongoDB.Driver.Core">
- <HintPath>C:/Users/atill/Documents/GitHub/archery-game/New game/archery game/Assets/Database/Plugins/MongoDB.Driver.Core.dll</HintPath>
+ <HintPath>C:/Users/hp/Documents/GitHub/archery-game/New game/archery game/Assets/Database/Plugins/MongoDB.Driver.Core.dll</HintPath>
  </Reference>
  <Reference Include="MongoDB.Driver">
- <HintPath>C:/Users/atill/Documents/GitHub/archery-game/New game/archery game/Assets/Database/Plugins/MongoDB.Driver.dll</HintPath>
+ <HintPath>C:/Users/hp/Documents/GitHub/archery-game/New game/archery game/Assets/Database/Plugins/MongoDB.Driver.dll</HintPath>
  </Reference>
  <Reference Include="MongoDB.Libmongocrypt">
- <HintPath>C:/Users/atill/Documents/GitHub/archery-game/New game/archery game/Assets/Database/Plugins/MongoDB.Libmongocrypt.dll</HintPath>
+ <HintPath>C:/Users/hp/Documents/GitHub/archery-game/New game/archery game/Assets/Database/Plugins/MongoDB.Libmongocrypt.dll</HintPath>
  </Reference>
  <Reference Include="System.Buffers">
- <HintPath>C:/Users/atill/Documents/GitHub/archery-game/New game/archery game/Assets/Database/Plugins/System.Buffers.dll</HintPath>
+ <HintPath>C:/Users/hp/Documents/GitHub/archery-game/New game/archery game/Assets/Database/Plugins/System.Buffers.dll</HintPath>
  </Reference>
  <Reference Include="Newtonsoft.Json">
- <HintPath>C:/Users/atill/Documents/GitHub/archery-game/New game/archery game/Library/PackageCache/com.unity.nuget.newtonsoft-json@2.0.0/Runtime/Newtonsoft.Json.dll</HintPath>
+ <HintPath>C:/Users/hp/Documents/GitHub/archery-game/New game/archery game/Library/PackageCache/com.unity.nuget.newtonsoft-json@2.0.0/Runtime/Newtonsoft.Json.dll</HintPath>
  </Reference>
  <Reference Include="mscorlib">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2020.1.7f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>

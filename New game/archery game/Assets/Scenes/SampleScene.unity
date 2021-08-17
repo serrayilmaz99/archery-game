@@ -300,10 +300,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ca52469fa8ccfb4388a0c4394f464f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  totalTargets: 0
   scoreText: {fileID: 1061656297}
   timerText: {fileID: 1577293859}
+  gameStarted: 0
   startGameChime: {fileID: 8300000, guid: 20c372b43f56e2b48adb5c7757ed1f59, type: 3}
   endGameChime: {fileID: 8300000, guid: acd78459da513c24f823af866ef913ed, type: 3}
+  TargetChoices: 
   buttons:
   - {fileID: 110938664}
   - {fileID: 1322651507}
@@ -2027,7 +2030,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb8742784829f4344b2447ee98359ed3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnArea: {x: 1, y: 2, z: 5}
+  spawnArea: {x: 1, y: 3, z: 4}
+  Targets: []
   targetPrefab: {fileID: 6642316897388558982, guid: 46f130b83002e7242b60ebe72480b0d9, type: 3}
 --- !u!4 &1729712413
 Transform:
@@ -2037,8 +2041,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1729712411}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -80.51, y: -64.84, z: -36.17}
-  m_LocalScale: {x: 0.32160944, y: -4.488951, z: 1}
+  m_LocalPosition: {x: -80.51, y: -64.65, z: -36.17}
+  m_LocalScale: {x: 0.160798, y: 0.3337416, z: 0.28369}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
