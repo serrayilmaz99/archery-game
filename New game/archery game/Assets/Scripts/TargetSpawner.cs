@@ -8,8 +8,6 @@ public class TargetSpawner : MonoBehaviour
     public Vector3 spawnArea = new Vector3(1, 3, 4);
     public List<GameObject> Targets = new List<GameObject>();
     GameManager gameManager;
-
-    [SerializeField]
     public GameObject targetPrefab = null;
 
     void Start()
@@ -54,8 +52,7 @@ public class TargetSpawner : MonoBehaviour
     {
         Vector3 posTarget = RandomCoords();
 
-        GameObject targett = Instantiate(targetPrefab, posTarget, targetPrefab.transform.rotation);
-        targett.transform.localScale *= 0.8f;
+        GameObject targett = Instantiate(targetPrefab, posTarget, Quaternion.Euler(0,90,0));
 
         Targets.Add(targett);
 

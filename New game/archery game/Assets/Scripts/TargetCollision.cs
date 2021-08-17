@@ -4,18 +4,15 @@ using System;
 
 public class TargetCollision : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject impactParticles;
+    
+    public GameObject impactParticles = null;
 
     private TargetSpawner targetSpawner;
 
     GameManager gameManager;
 
     public int counter;
-    public bool hit;
 
-    [SerializeField]
-    public GameObject targetPrefab = null;
 
     static private GameObject targetSpawnerGO;
 
@@ -37,7 +34,7 @@ public class TargetCollision : MonoBehaviour
 
     public void SpawnTarget(Vector3 coords)
     {
-        GameObject targett = Instantiate(targetPrefab, coords, targetPrefab.transform.rotation);
+        GameObject targett = Instantiate(targetSpawner.targetPrefab, coords, Quaternion.Euler(0,90,0));
 
         targetSpawner.Targets.Add(targett);
 
@@ -76,6 +73,7 @@ public class TargetCollision : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Arrow"))
         {
+            other.gameObject.GetComponent<Collider>().enabled = false;
             gameManager.totalTargets--;
             Vector3 maxMissed = FindMax();
             Vector3 newCoords;
@@ -92,8 +90,8 @@ public class TargetCollision : MonoBehaviour
                 }
             }
 
-            other.gameObject.GetComponent<Collider>().enabled = false;
-            other.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+            
+            //other.gameObject.GetComponent<Rigidbody>().isKinematic = false;
 
             GetComponent<Collider>().enabled = false;
             GetComponent<Rigidbody>().isKinematic = false;
@@ -101,7 +99,7 @@ public class TargetCollision : MonoBehaviour
             impactSound.volume = other.relativeVelocity.normalized.magnitude;
             impactSound.Play();
 
-            GameObject sparkle = Instantiate(impactParticles, transform.position, impactParticles.transform.rotation);
+            GameObject sparkle = Instantiate(impactParticles, transform.position, Quaternion.identity);
             Destroy(sparkle, 1f);
 
             gameManager.score++;

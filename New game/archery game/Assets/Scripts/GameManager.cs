@@ -1,4 +1,4 @@
-﻿
+
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
 
     public string TargetChoices;
     public List<GameObject> buttons;
+
 
     MongoClient client = new MongoClient("mongodb+srv://admin-serra:serrayilmaz@mflix.ktzy1.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
     IMongoDatabase database;
