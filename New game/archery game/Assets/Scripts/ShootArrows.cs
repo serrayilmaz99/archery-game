@@ -95,6 +95,7 @@ public class ShootArrows : MonoBehaviour
 
         GameObject arrow = Instantiate(arrowPrefab, arrowTransform.position, arrowTransform.rotation);
 
+        Destroy(arrow, 5f);
         arrow.GetComponent<Rigidbody>().AddForce(arrowTransform.forward * currentArrowForce);
 
         currentArrowForce = 0;
