@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class VerticalButton : MonoBehaviour
+public class VerticalButton : MonoBehaviour // Sets the game in Vertical mode
 {
     public Button Button;
     GameManager GameManager;

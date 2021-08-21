@@ -5,14 +5,14 @@ using UnityEngine.UI;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviour // Manages the game
 {
     //[SerializeField]
     public float gameLengthInSeconds = 20f;
 
-    public List<Vector3> HitTargets = new List<Vector3>();
+    public List<Vector3> HitTargets = new List<Vector3>(); // List of targets that were hit by the player
 
-    public int totalTargets;
+    public int totalTargets; // Total number of targets that are active, on the screen
 
     [SerializeField]
     private Text scoreText;
@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
 
     private TargetSpawner targetSpawner;
 
-    public string TargetChoices;
+    public string TargetChoices; // The choice of the mode of the game
     public List<GameObject> buttons;
 
 
@@ -75,6 +75,7 @@ public class GameManager : MonoBehaviour
         {
             item.SetActive(false);
         }
+
         gameStateText = gameStateUI.GetComponent<Text>();
         gameStateText.text = "Hit Space to Play!";
 
@@ -92,24 +93,24 @@ public class GameManager : MonoBehaviour
     void Update()
     {
 
-        if (gameStarted == false && Input.GetKeyDown(KeyCode.Space))
+        if (gameStarted == false && Input.GetKeyDown(KeyCode.Space)) // If space is pressed and the game has not started yet, start the game
         {
             StartGame();
         }
 
-        if (gameStarted)
+        if (gameStarted) 
         {
             timer -= Time.deltaTime;
 
-            UpdateScoreBoard();
+            UpdateScoreBoard(); // Maintain the score board
         }
 
-        if (gameStarted && timer <= 0)
+        if (gameStarted && timer <= 0) // If time is up, end the game
         {
             EndGame();
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape)) // If escape button is pressed finish the game
         {
             Application.Quit();
         }
@@ -140,13 +141,13 @@ public class GameManager : MonoBehaviour
         timer = gameLengthInSeconds;
         gameStateSounds.clip = endGameChime;
         gameStateSounds.Play();
-        foreach (var item in HitTargets)
+        foreach (var item in HitTargets) // Copy the Hit list to the database
         {
             var document = new BsonDocument { { "x", item.x},{ "y", item.y},
                 { "z", item.z } };
             collection.InsertOne(document); 
         }
 
-        HitTargets.Clear();
+        HitTargets.Clear(); // When the game ends, clear the list
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LeftButton : MonoBehaviour
+public class LeftButton : MonoBehaviour // Sets the game in Left Side mode
 {
     public Button Button;
     GameManager GameManager;

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class BothButton : MonoBehaviour
+public class BothButton : MonoBehaviour // Sets the game in Both Sides mode
 {
     public Button Button;
     GameManager GameManager;

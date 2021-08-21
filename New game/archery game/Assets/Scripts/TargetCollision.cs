@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using System;
 
-public class TargetCollision : MonoBehaviour
+public class TargetCollision : MonoBehaviour // Responsible for spawning the targets and detecting the collisions between the arrows and targets
 {
     
     public GameObject impactParticles = null;
@@ -11,8 +11,7 @@ public class TargetCollision : MonoBehaviour
 
     GameManager gameManager;
 
-    public int counter;
-
+    public int counter; // Counts the seconds while the target is active
 
     static private GameObject targetSpawnerGO;
 
@@ -29,7 +28,7 @@ public class TargetCollision : MonoBehaviour
         targetSpawnerGO = GameObject.Find("Target Spawner");
         targetSpawner = targetSpawnerGO.GetComponent<TargetSpawner>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        StartCoroutine(Countdown());
+        StartCoroutine(Countdown()); // Starts counting when a target is spawned
     }
 
     public void SpawnTarget(Vector3 coords)
@@ -43,22 +42,21 @@ public class TargetCollision : MonoBehaviour
 
         gameManager.totalTargets++;
     }
-
    
     
-    Vector3 FindMax()
+    Vector3 FindMax() // Finds the target that has the longest counter, active for the longest time
     {
         Vector3 max = new Vector3(0, 0, 0);
-        if (targetSpawner.Targets.Count == 0)
+        if (targetSpawner.Targets.Count == 0) // If size of list is 0, assign a random value to maximum
         {
             max = targetSpawner.RandomCoords();
-        } else if (targetSpawner.Targets.Count == 1)
+        } else if (targetSpawner.Targets.Count == 1) // If size of list is 1, maximum is the first object
         {
             max = targetSpawner.Targets[0].transform.position;
 
         } else {
             max = targetSpawner.Targets[0].transform.position;
-            for (int i = 1; i < targetSpawner.Targets.Count; i++)
+            for (int i = 1; i < targetSpawner.Targets.Count; i++) // Else, find the target with the longest counter
             {
                 if(targetSpawner.Targets[i].GetComponent<TargetCollision>().counter >= targetSpawner.Targets[i - 1].GetComponent<TargetCollision>().counter)
                 {
@@ -69,7 +67,7 @@ public class TargetCollision : MonoBehaviour
         return max;
     }
     
-    void OnCollisionEnter(Collision other)
+    void OnCollisionEnter(Collision other) // Detect collisions
     {
         if (other.gameObject.CompareTag("Arrow"))
         {
@@ -77,16 +75,16 @@ public class TargetCollision : MonoBehaviour
             gameManager.totalTargets--;
             Vector3 maxMissed = FindMax();
             Vector3 newCoords;
-            if (maxMissed == gameObject.transform.position)
+            if (maxMissed == gameObject.transform.position) // If the target with the longest counter is hit, spawn a new target with random coordinates
             {
                 newCoords = targetSpawner.RandomCoords();
             } else
             {
                 newCoords = (maxMissed + gameObject.transform.position) * 0.5f;
-                newCoords = (newCoords + gameObject.transform.position) * 0.5f;
+                newCoords = (newCoords + gameObject.transform.position) * 0.5f; // Else, try to spawn a new target closer to the target with the longest counter
                 if ((Math.Abs((maxMissed - newCoords).x) <= 0.1f) || (Math.Abs((maxMissed - newCoords).y) <= 0.1f) || (Math.Abs((maxMissed - newCoords).z) <= 0.1f))
                 {
-                    newCoords = targetSpawner.RandomCoords();
+                    newCoords = targetSpawner.RandomCoords(); // If the new position is too close to the target with the longest counter, spawn the new target randomly
                 }
             }
 
@@ -107,11 +105,11 @@ public class TargetCollision : MonoBehaviour
 
             other.gameObject.GetComponent<Rigidbody>().Sleep();
 
-            StopCoroutine(Countdown());
+            StopCoroutine(Countdown()); // The target is hit, stop the counter
             targetSpawner.Targets.Remove(gameObject);
             SpawnTarget(newCoords);
 
-            gameManager.HitTargets.Add(transform.position);
+            gameManager.HitTargets.Add(transform.position); // Add the target to the list of targets that were hit
             Destroy(gameObject,2f);
         }
     }

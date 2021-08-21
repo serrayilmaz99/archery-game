@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 public class TargetSpawner : MonoBehaviour
 {
     public Vector3 spawnArea = new Vector3(1, 3, 4);
-    public List<GameObject> Targets = new List<GameObject>();
+    public List<GameObject> Targets = new List<GameObject>(); // Keeps the list of targets that are active
     GameManager gameManager;
     public GameObject targetPrefab = null;
 
@@ -17,36 +17,71 @@ public class TargetSpawner : MonoBehaviour
 
     void Update()
     {
-        if (gameManager.gameStarted && gameManager.totalTargets == 0)
+        if (gameManager.gameStarted && gameManager.totalTargets == 0) // When game starts, spawn 3 targets randomly
         {
             for (int i = 0; i < 3; i++)
             {
                 SpawnTarget();
             }
         }
-        if (!gameManager.gameStarted && gameManager.totalTargets > 0)
+        if (!gameManager.gameStarted && gameManager.totalTargets > 0) // When game ends destroy the targets that are left
         {
             DestroyTargets();
             gameManager.totalTargets = 0;
         }
     }
-    public Vector3 RandomCoords()
+    public Vector3 RandomCoords() // Returns the newly spawned object's position
     {
-        float xMin = GameObject.FindGameObjectWithTag("TargetSpawner").transform.position.x - spawnArea.x / 2;
-        float yMin = GameObject.FindGameObjectWithTag("TargetSpawner").transform.position.y - spawnArea.y / 2;
-        float zMin = GameObject.FindGameObjectWithTag("TargetSpawner").transform.position.z - spawnArea.z / 2;
-        float xMax = GameObject.FindGameObjectWithTag("TargetSpawner").transform.position.x + spawnArea.x / 2;
-        float yMax = GameObject.FindGameObjectWithTag("TargetSpawner").transform.position.y + spawnArea.y / 2;
-        float zMax = GameObject.FindGameObjectWithTag("TargetSpawner").transform.position.z + spawnArea.z / 2;
+        float xMin = transform.position.x - spawnArea.x / 2;
+        float yMin = transform.position.y - spawnArea.y / 2;
+        float zMin = transform.position.z - spawnArea.z / 2;
+        float xMax = transform.position.x + spawnArea.x / 2;
+        float yMax = transform.position.y + spawnArea.y / 2;
+        float zMax = transform.position.z + spawnArea.z / 2;
 
+        if (gameManager.TargetChoices == "Vertical")
+        {
+            float xRandom = Random.Range(xMin, xMax);
+            float yRandom = Random.Range(yMin, yMax);
+            float zRandom = (zMin + zMax) / 2;
 
-        float xRandom = Random.Range(xMin, xMax);
-        float yRandom = Random.Range(yMin, yMax);
-        float zRandom = Random.Range(zMin, zMax);
+            return new Vector3(xRandom, yRandom, zRandom);
+        }
 
-        Vector3 posTarget = new Vector3(xRandom, yRandom, zRandom);
+        if (gameManager.TargetChoices == "Horizontal")
+        {
+            float xRandom = (xMin + xMax) / 2;
+            float yRandom = (yMin + yMax) / 2;
+            float zRandom = Random.Range(zMin, zMax);
 
-        return posTarget;
+            return new Vector3(xRandom, yRandom, zRandom);
+        }
+
+        if (gameManager.TargetChoices == "Left")
+        {
+            float xRandom = Random.Range(xMin, xMax);
+            float yRandom = Random.Range(yMin, yMax);
+            float zRandom = Random.Range(zMin / 2 + zMax / 2, zMax);
+
+            return new Vector3(xRandom, yRandom, zRandom);
+        }
+        if (gameManager.TargetChoices == "Both")
+        {
+            float xRandom = Random.Range(xMin, xMax);
+            float yRandom = Random.Range(yMin, yMax);
+            float zRandom = Random.Range(zMin, zMax);
+
+            return new Vector3(xRandom, yRandom, zRandom);
+        }
+        if (gameManager.TargetChoices == "Right")
+        {
+            float xRandom = Random.Range(xMin, xMax);
+            float yRandom = Random.Range(yMin, yMax);
+            float zRandom = Random.Range(zMin, zMin / 2 + zMax / 2);
+
+            return new Vector3(xRandom, yRandom, zRandom);
+        }
+        return new Vector3(0, 0, 0);
     }
     public void SpawnTarget()
     {
@@ -54,7 +89,7 @@ public class TargetSpawner : MonoBehaviour
 
         GameObject targett = Instantiate(targetPrefab, posTarget, Quaternion.Euler(0,90,0));
 
-        Targets.Add(targett);
+        Targets.Add(targett); // Add the newly spawn target to the Targets list
 
         targett.GetComponent<Collider>().enabled = true;
         targett.GetComponent<Rigidbody>().isKinematic = true;
@@ -62,7 +97,7 @@ public class TargetSpawner : MonoBehaviour
         gameManager.totalTargets++;
     }
 
-    public void DestroyTargets()
+    public void DestroyTargets() // Destroy the targets that are left when the game ends
     {
         GameObject[] targets = GameObject.FindGameObjectsWithTag("Target");
 

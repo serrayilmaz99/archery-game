@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class RightButton : MonoBehaviour
+public class RightButton : MonoBehaviour // Sets the game in Right Side mode
 {
     public Button Button;
     GameManager GameManager;

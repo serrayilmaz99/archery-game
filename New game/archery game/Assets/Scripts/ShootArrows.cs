@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShootArrows : MonoBehaviour
+public class ShootArrows : MonoBehaviour // Responsible of the arrows to shoot
 {
 
     [SerializeField]
@@ -40,23 +40,23 @@ public class ShootArrows : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.gameStarted)
+        if (GameManager.gameStarted) 
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0)) // When left mouse button is pressed
             {
                 DrawBow();
             }
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButton(0)) // While the left mouse button is being pressed
             {
                 PowerUpBow();
             }
-            if (Input.GetMouseButtonUp(0))
+            if (Input.GetMouseButtonUp(0)) // When left mouse button is released
             {
                 ReleaseBow();
             }
         }
-
-        else if (!GameManager.gameStarted)
+         
+        else if (!GameManager.gameStarted) // Shooting arrows while the game is not started is not allowed
         {
             bowAnimator.SetBool("drawing", false);
             currentArrowForce = 0;

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BowController : MonoBehaviour
+public class BowController : MonoBehaviour // Responsible for the movement of the bow
 {
    // [SerializeField]
     private float rotationSpeed = 1.0f;

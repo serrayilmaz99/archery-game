@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HorizontalButton : MonoBehaviour
+public class HorizontalButton : MonoBehaviour // Sets the game in Horizontal mode
 {
     public Button Button;
     GameManager GameManager;
